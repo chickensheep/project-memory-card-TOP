@@ -1,0 +1,133 @@
+body {
+	background-image: url("./background2.png");
+	background-position: center top;
+	background-size: 140%;
+}
+
+/* score */
+
+.scores {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	font-size: 40px;
+	font-family: "Press Start 2P";
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+/* card */
+
+.cardsDiv {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-content: space-between;
+	gap: 20px;
+}
+
+.cardDiv.disabled {
+	pointer-events: none;
+}
+
+.cardDiv:hover .cardInner {
+	transform: scale(1.1);
+	box-shadow: 0px 0px 20px black;
+	border-radius: 10px;
+}
+
+.cardDiv:hover .cardInner.flipped {
+	transform: rotateY(180deg);
+}
+
+.cardInner {
+	background-color: rgb(133, 221, 0);
+	width: 200px;
+	height: 277px;
+	border-radius: 10px;
+
+	transform: scale(1);
+	transform: rotateY(0deg);
+	box-shadow: none;
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	transform-style: preserve-3d;
+}
+
+.image {
+	background-color: yellow;
+	margin: 20px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.name {
+	margin: 10px;
+	text-align: center;
+	font-family: "Bungee";
+	font-size: 150%;
+}
+
+.front,
+.back {
+	position: absolute;
+	backface-visibility: hidden;
+}
+
+.front {
+	transform: rotateY(0deg);
+	pointer-events: none;
+	text-align: center;
+	width: 100%;
+}
+
+.back {
+	transform: rotateY(180deg);
+	pointer-events: none;
+}
+
+.backImage {
+	width: 200px;
+	height: 277px;
+}
+
+.flipped {
+	transform: rotateY(180deg);
+}
+
+.cardInner.flipped .front {
+	pointer-events: none;
+}
+
+/* restart */
+
+.restart {
+	border-radius: 10px;
+	position: absolute;
+	left: 45%;
+	top: 45%;
+	z-index: 6;
+	background-color: white;
+	padding: 10px;
+	font-family: "Press Start 2P";
+	text-align: center;
+}
+
+.restartButton {
+	font-family: "Bungee";
+	font-size: 15px;
+	padding: 5px 10px;
+	border-radius: 10px;
+	background-color: white;
+	border: black 1px solid;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 5;
+}
