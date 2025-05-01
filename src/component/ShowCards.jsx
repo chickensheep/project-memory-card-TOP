@@ -7,6 +7,10 @@ import { Restart } from "./Restart";
 
 import backCard from "/backCard.jpg";
 
+import correctSound from "/click.wav";
+import wrongSound from "/wrongClick.wav";
+import restartSound from "/restartSound.mp3";
+
 function ShowCards() {
 	const [cards, setCards] = useState([]);
 	const [cardsClicked, setCardsClicked] = useState([]);
@@ -26,8 +30,6 @@ function ShowCards() {
 		async function loadCards() {
 			const result = await generateCards();
 			setCards(result);
-			setFlipped((prev) => !prev);
-			playRestartSound();
 		}
 		loadCards();
 	}, [refreshCard]);
@@ -42,17 +44,17 @@ function ShowCards() {
 	// sound
 
 	const playCorrectSound = () => {
-		const audio = new Audio("/click.wav");
+		const audio = new Audio(correctSound);
 		audio.play();
 	};
 
 	const playWrongSound = () => {
-		const audio = new Audio("/wrongClick.wav");
+		const audio = new Audio(wrongSound);
 		audio.play();
 	};
 
 	const playRestartSound = () => {
-		const audio = new Audio("/restartSound.mp3");
+		const audio = new Audio(restartSound);
 		audio.play();
 	};
 
@@ -74,8 +76,7 @@ function ShowCards() {
 			playCorrectSound();
 			setFlipped((prev) => !prev);
 			setTimeout(() => {
-				const shuffled = randomiseCards(cards);
-				setCards(shuffled);
+				randomiseCards(cards);
 				setFlipped((prev) => !prev);
 			}, 1000);
 		} else {
@@ -92,6 +93,10 @@ function ShowCards() {
 		setFlipped((prev) => !prev);
 		setShowRestart((prev) => !prev);
 		setRefreshCard((prev) => !prev);
+		setTimeout(() => {
+			setFlipped((prev) => !prev);
+			playRestartSound();
+		}, 2000);
 	};
 
 	// return stuff
